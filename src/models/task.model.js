@@ -26,8 +26,6 @@ const taskSchema = new mongoose.Schema({
   enum: ["started", "in-progress", "completed"],
   default:"started"
   }
-
-
 },{
   timestamps:true
 });
