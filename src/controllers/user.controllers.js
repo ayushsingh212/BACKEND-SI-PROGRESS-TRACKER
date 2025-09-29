@@ -1,7 +1,7 @@
 import { options } from "../constants.js";
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js"
-
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -20,7 +20,8 @@ const generateAccessAndRefreshToken = async (userId) => {
 
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+
+  const { fullName, email, password } = req.body;
 
   if (!fullName || !email || !password) {
     throw new ApiError(400, "All fields are required");
@@ -177,3 +178,13 @@ const updateDetails = asyncHandler(async (req, res) => {
   )
 
 })
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+  getCurrentUser,
+  changeCurrentPassword,
+  updateDetails
+}
