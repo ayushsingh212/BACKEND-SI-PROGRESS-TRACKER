@@ -72,7 +72,7 @@ const updateTask = asyncHandler(async(req,res)=>{
 
  
   return res.status(202).json(
-     new ApiResponse(202,task,"Task has been created successfully")
+     new ApiResponse(202,task,"Task has been updated successfully")
   )
 
 
