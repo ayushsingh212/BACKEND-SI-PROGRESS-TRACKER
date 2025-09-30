@@ -21,7 +21,7 @@ const createTask= asyncHandler(async(req,res)=>{
     userId,
     taskName,
     taskDetails
-   }).lean();
+   });
 
   if(!task)
   {
