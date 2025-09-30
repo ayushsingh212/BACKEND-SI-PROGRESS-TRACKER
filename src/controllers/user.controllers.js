@@ -30,9 +30,13 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid email format");
   }
 
-  if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-    throw new ApiError(400, "Password is so weak")
-  }
+ if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+  throw new ApiError(
+    400,
+    "Password must be at least 8 characters long and include at least one letter and one number."
+  );
+}
+
 
   const isExistingUser = await User.findOne({
     email
@@ -136,9 +140,13 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
   const id = req.user?._id;
-  if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(newPassword)) {
-    throw new ApiError(400, "Password is so weak")
-  }
+if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+  throw new ApiError(
+    400,
+    "Password must be at least 8 characters long and include at least one letter and one number."
+  );
+}
+
   if (newPassword !== confirmNewPassword)
     throw new ApiError(400, "The entered password are not matching");
 
