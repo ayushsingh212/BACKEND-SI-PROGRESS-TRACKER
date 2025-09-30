@@ -1,7 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-
-
-
 const taskSchema = new mongoose.Schema({
   userId:{
     type:Schema.Types.ObjectId,

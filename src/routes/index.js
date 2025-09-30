@@ -4,14 +4,8 @@ import { Router } from "express";
 
 const router = Router();
 
-
-router.use("/user",userRoutes);
-router.use("/task",taskRoutes)
-
-
-
-
-
+router.use("/user", userRoutes);
+router.use("/task", taskRoutes)
 
 export default router;
 

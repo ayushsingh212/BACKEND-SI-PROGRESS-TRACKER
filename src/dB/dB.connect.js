@@ -10,26 +10,18 @@ dotenv.config({
   path: "../../.env",
 });
 
+const connectDB = async function () {
 
+  try {
 
+    const connect = await mongoose.connect(`${process.env.MONGODB_URL}/TheProgressTracker`);
 
-const connectDB = async function() {
-  
- try {
-
-const connect = await mongoose.connect(`${process.env.MONGODB_URL}/TheProgressTracker`) ;
-
-console.log("The database has been connected successfuly",connect.connection.host)
-
-
-
-
-  
- } catch (error) {
-   console.log("MongoDB error ",error)
-   process.exit(1)
- }
+    console.log("The database has been connected successfuly", connect.connection.host);
+  } catch (error) {
+    console.log("MongoDB error ", error)
+    process.exit(1)
+  }
 
 
 }
-export {connectDB}
+export { connectDB }
