@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "8d770639-df63-40ba-949d-3d7b6396c0e6",
+		"name": "Progress Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44123633"
+	},
+	"item": [
+		{
+			"name": "For changing the Password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldPassword\":\"123\",\r\n    \"newPassword\":\"111\",\r\n    \"confirmNewPassword\":\"111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/changePassword",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For Registering the User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\":\"Ayush Singh\",\r\n    \"email\":\"ayushrajput2249@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/register",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For Getting the current User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/getUser",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"getUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For login by the user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"email\":\"ayushrajput2249@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/login",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For refreshing the access token with the help of refresh token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/refreshToken",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"refreshToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For updating the details of the current user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newName\":\"Ayush Thakur\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/user/updateDetails",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"updateDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For creating a task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"taskName\":\"Solving DSA question\",\r\n    \"taskDetails\":\"I will be solving the dsa question\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/task/createTask",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"task",
+						"createTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For updating the task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newTaskName\":\"AYush Thak\",\r\n    \"newTaskDetails\":\"AYush SIngh  and he codes\"\r\n}"
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/task/updateTask/68db995bbaef3f89b314e361",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"task",
+						"updateTask",
+						"68db995bbaef3f89b314e361"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For updating the task Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"taskStatus\":\"completed\"\r\n}"
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/task/updateTaskStatus/68db995bbaef3f89b314e361",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"task",
+						"updateTaskStatus",
+						"68db995bbaef3f89b314e361"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "For getting the task Status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"taskStatus\":\"completed\"\r\n}"
+				},
+				"url": {
+					"raw": "https://backend-si-progress-tracker.onrender.com/api/task/getTaskStatus/68db995bbaef3f89b314e361",
+					"protocol": "https",
+					"host": [
+						"backend-si-progress-tracker",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"task",
+						"getTaskStatus",
+						"68db995bbaef3f89b314e361"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
