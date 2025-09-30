@@ -21,7 +21,7 @@ const createTask= asyncHandler(async(req,res)=>{
     userId,
     taskName,
     taskDetails
-   })
+   }).lean();
 
   if(!task)
   {
@@ -31,7 +31,7 @@ const createTask= asyncHandler(async(req,res)=>{
 
   return res.status(202)
   .json(
-    new ApiError(200,task,"The task has been created successfully")
+    new ApiResponse(200,task,"The task has been created successfully")
   )
 })
 const updateTask = asyncHandler(async(req,res)=>{
