@@ -3,7 +3,7 @@ import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
-
+import jwt from "jsonwebtoken"
 const generateAccessAndRefreshToken = async (userId) => {
   const user = await User.findById(userId);
   if (!user) throw new ApiError(404, "User not found");
@@ -69,10 +69,10 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(400, "The user does not exist, Please Register first");
   }
+ 
+  const passwordCorrect = await user.isPasswordCorrect(password);
 
-  const passwordCorrect = await user.isPasswordCorrect(user.password);
-
-
+   console.log("password",passwordCorrect);
   if (!passwordCorrect) {
     throw new ApiError(401, "Sorry the password is incorrect! Please try again")
   }
@@ -99,12 +99,17 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   const token = req.cookies?.refreshToken;
   if (!token) throw new ApiError(400, "Refresh token missing");
 
+
   let decoded;
-  try {
-    decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
-  } catch {
-    throw new ApiError(401, "Invalid refresh token");
+ try {
+  decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+} catch (err) {
+  if (err.name === "TokenExpiredError") {
+    throw new ApiError(401, "Refresh token expired");
   }
+  throw new ApiError(401, "Invalid refresh token");
+}
+
 
   const user = await User.findById(decoded._id);
   if (!user) throw new ApiError(404, "User not found");
@@ -133,9 +138,16 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   if (newPassword !== confirmNewPassword)
     throw new ApiError(400, "The entered password are not matching");
 
-  const user = User.findById(id);
+  const user = await User.findById(id);
 
-  if (!user.isPasswordCorrect(oldPassword)) {
+  if(!user)
+  {
+    throw new ApiError(401,"Sorry no user has been found");
+  }
+
+  const correct = await user.isPasswordCorrect(oldPassword)
+
+  if (!correct) {
     throw new ApiError(400, "Password is incorrect! Please try again");
   }
 
@@ -148,36 +160,27 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password has been changed successfully"));
 });
 const updateDetails = asyncHandler(async (req, res) => {
-
   const { newName } = req.body;
 
-  if (!newName || newName.trim === "") {
+  if (!newName || newName.trim() === "") {
     throw new ApiError(400, "The new name cannot be empty");
   }
 
-  const user = User.findByIdAndUpdate(req.user?._id, {
-    $set: {
-      fullName: newName
-    },
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    { $set: { fullName: newName } },
+    { new: true, runValidators: true }
+  ).select("-password -refreshToken");
 
-  },
-    {
-      new: true,
-      runValidators: true,
-
-    }
-  ).select("-password -refreshToken")
-
-  if(!user)
-  {
-    throw new ApiError(400,"Sorry user does not exist")
+  if (!user) {
+    throw new ApiError(400, "Sorry, user does not exist");
   }
 
   return res.status(200).json(
-    new ApiResponse(200,user,"The name has been updated successfully")
-  )
+    new ApiResponse(200, user, "The name has been updated successfully")
+  );
+});
 
-})
 
 export {
   registerUser,
