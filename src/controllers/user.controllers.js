@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (!fullName || !email || !password) {
     throw new ApiError(400, "All fields are required");
-  }
+  } 
 
   if (!/\S+@\S+\.\S+/.test(email)) {
     throw new ApiError(400, "Invalid email format");
@@ -141,7 +141,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
   const id = req.user?._id;
-if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(newPassword)) {
   throw new ApiError(
     400,
     "Password must be at least 8 characters long and include at least one letter, one number, and one special character (@, $, !, %, *, ?, &)."
